@@ -20,7 +20,6 @@
         android:gravity="bottom"
         android:inputType="none"
         android:isScrollContainer="true"
-        android:onClick="clearLogs"
         android:scrollbars="vertical"
         android:textAlignment="viewStart"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
