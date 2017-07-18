@@ -1,9 +1,15 @@
 package net.juniet.ndx;
 
+import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -27,66 +33,118 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
+        for (int i = 0; i < 2; ++i) {
+            TableRow row = (TableRow) table.getChildAt(i);
+            for (int j = 0; j < row.getChildCount(); ++j) {
+                Button bt = (Button) row.getChildAt(j);
+                bt.setText(String.format("1%s", bt.getHint()));
+                bt.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        showPicker(v);
+                        return true;
+                    }
+                });
+            }
+        }
+        for (int i = 2; i < 4; ++i) {
+            TableRow row = (TableRow) table.getChildAt(i);
+            for (int j = 0; j < row.getChildCount(); ++j) {
+                Button bt = (Button) row.getChildAt(j);
+                bt.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        showFormula(v);
+                        return true;
+                    }
+                });
+            }
+        }
     }
 
-    public void roll1D4(View view) {
-        addRoll(rollNdX(1, 4));
-    }
-    public void roll1D6(View view) {
-        addRoll(rollNdX(1, 6));
-    }
-    public void roll1D8(View view) {
-        addRoll(rollNdX(1, 8));
-    }
-    public void roll1D10(View view) {
-        addRoll(rollNdX(1, 10, 0));
-    }
-    public void roll1D12(View view) {
-        addRoll(rollNdX(1, 12));
-    }
-    public void roll1D20(View view) {
-        addRoll(rollNdX(1, 20));
-    }
-    public void roll1D100(View view) {
-        addRoll(rollNdX(1, 100, 0));
-    }
-    public void roll1DF(View view) {
-        addRoll(rollNdF(1));
+    public void rollStandard(View view) {
+        final Button btn = (Button) view;
+        addRoll(getRollFormula(btn.getText().toString()));
     }
 
-    public void rollCustom1(View view) {
-        addRoll(rollNdF(4));
-    }
-    public void rollCustom2(View view) {
-        addRoll(rollNdX(4, 6));
-    }
-    public void rollCustom3(View view) {
-        addRoll(rollNdX(20, 100, 0));
-    }
-    public void rollCustom4(View view) {
-        addRoll(rollNdX(1, 3));
-    }
-    public void rollCustom5(View view) {
-        addRoll(rollNdF(4));
-    }
-    public void rollCustom6(View view) {
-        addRoll(rollNdX(4, 6));
-    }
-    public void rollCustom7(View view) {
-        addRoll(rollNdX(20, 100, 0));
-    }
-    public void rollCustom8(View view) {
-        addRoll(rollNdX(1, 3));
+    public void rollCustom(View view) {
+        final Button btn = (Button) view;
+        addRoll(getRollFormula(btn.getHint().toString()));
     }
 
     private void addRoll(String s) {
-        TextView text = (TextView) findViewById(R.id.rollResults);
+        final TextView text = (TextView) findViewById(R.id.rollResults);
         text.append(s);
     }
 
     private void clearRolls(TextView text) {
         text.setText(null);
         rollsCount = 0;
+    }
+
+    private void showPicker(View view) {
+        final Button btn = (Button) view;
+        final Dialog d = new Dialog(MainActivity.this);
+        d.setTitle("Number Picker");
+        d.setContentView(R.layout.dialog1);
+        final NumberPicker np = d.findViewById(R.id.numberPicker1);
+        np.setMinValue(1);
+        np.setMaxValue(100);
+        np.setWrapSelectorWheel(false);
+        Button bSet = d.findViewById(R.id.buttonSet);
+        bSet.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                int n = np.getValue();
+                d.dismiss();
+                btn.setText(String.format("%s%s", Integer.toString(n), btn.getHint()));
+                btn.callOnClick();
+            }
+        });
+        d.show();
+    }
+
+    private void showFormula(View view) {
+        final Button btn = (Button) view;
+        final Dialog d = new Dialog(MainActivity.this);
+        d.setTitle("Formula Picker");
+        d.setContentView(R.layout.dialog2);
+        final EditText name = d.findViewById(R.id.editName);
+        name.setText(btn.getText());
+        final EditText formula = d.findViewById(R.id.editFormula);
+        formula.setText(btn.getHint());
+        Button bSet = d.findViewById(R.id.buttonSet);
+        bSet.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                d.dismiss();
+                final String n = name.getText().toString();
+                if (n.length() > 0) btn.setText(n);
+                final String f = formula.getText().toString();
+                if (f.length() > 0) btn.setHint(f);
+                btn.callOnClick();
+            }
+        });
+        d.show();
+    }
+
+    private String getRollFormula(String formula) {
+        String f = formula.toUpperCase();
+        String sn = f.substring(0, f.indexOf('D'));
+        String sx = f.substring(f.indexOf('D')+1);
+        int n = 0;
+        int x = 0;
+        try {
+            n = Integer.parseInt(sn);
+            if (!sx.equals("F")) x = Integer.parseInt(sx);
+        } catch (NumberFormatException nfe) {
+            return "[format error: " + formula + "]\n";
+        }
+        return (sx.equals("F") ? rollNdF(n) : rollNdX(n, x));
     }
 
     private String rollNdF(int n) {
@@ -124,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         if (rolls.length > 1) {
             sb.append(" [");
             for (int i = 0; i < rolls.length; ++i) {
-                if (i > 0) sb.append(",");
+                if (i > 0 && !isFate) sb.append(",");
                 sb.append(isFate ? f2c[rolls[i]+1] : Integer.toString(rolls[i]));
             }
             sb.append("]");
