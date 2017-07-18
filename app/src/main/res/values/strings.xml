@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NdX Dice Roller</string>
+    <string name="dice_4">D4</string>
+    <string name="dice_6">D6</string>
+    <string name="dice_8">D8</string>
+    <string name="dice_10">D10</string>
+    <string name="dice_12">D12</string>
+    <string name="dice_20">D20</string>
+    <string name="dice_100">D100</string>
+    <string name="dice_f">DF</string>
+    <string name="button_roll">Roll</string>
+</resources>

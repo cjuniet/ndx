@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.juniet.ndx.MainActivity">
+
+    <TextView
+        android:id="@+id/rollResults"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:gravity="bottom"
+        android:inputType="none"
+        android:isScrollContainer="true"
+        android:onClick="clearLogs"
+        android:scrollbars="vertical"
+        android:textAlignment="viewStart"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/buttonD4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:onClick="roll1D4"
+                android:text="@string/dice_4" />
+
+            <Button
+                android:id="@+id/buttonD6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:onClick="roll1D6"
+                android:text="@string/dice_6" />
+
+            <Button
+                android:id="@+id/buttonD8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:onClick="roll1D8"
+                android:text="@string/dice_8" />
+
+            <Button
+                android:id="@+id/buttonD10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:onClick="roll1D10"
+                android:text="@string/dice_10" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/buttonD12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:onClick="roll1D12"
+                android:text="@string/dice_12" />
+
+            <Button
+                android:id="@+id/buttonD20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:onClick="roll1D20"
+                android:text="@string/dice_20" />
+
+            <Button
+                android:id="@+id/buttonD100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:onClick="roll1D100"
+                android:text="@string/dice_100" />
+
+            <Button
+                android:id="@+id/buttonDF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:onClick="roll1DF"
+                android:text="@string/dice_f" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/buttonCustom1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="rollCustom1"
+                android:text="Custom1"
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/buttonCustom2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="rollCustom2"
+                android:text="Custom2"
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/buttonCustom3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="rollCustom3"
+                android:text="Custom3"
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/buttonCustom4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="rollCustom4"
+                android:text="Custom4"
+                android:textSize="8sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/buttonCustom5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="rollCustom5"
+                android:text="Custom5"
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/buttonCustom6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="rollCustom6"
+                android:text="Custom6"
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/buttonCustom7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="rollCustom7"
+                android:text="Custom7"
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/buttonCustom8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="rollCustom8"
+                android:text="Custom8"
+                android:textSize="8sp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>
