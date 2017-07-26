@@ -1,6 +1,7 @@
 package net.juniet.ndx;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String PREFS_NAME = "preferences";
+    private final int MAX_ROWS = 4;
+    private final int MAX_COLS = 4;
     private static final char[] f2c = {'-','o','+'};
     private final Random rng = new Random();
     private int rollsCount = 0;
@@ -23,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 
         TextView textView = (TextView) findViewById(R.id.rollResults);
         textView.setMovementMethod(new ScrollingMovementMethod());
@@ -37,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
         TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
         for (int i = 0; i < 2; ++i) {
             TableRow row = (TableRow) table.getChildAt(i);
-            for (int j = 0; j < row.getChildCount(); ++j) {
+            for (int j = 0; j < MAX_COLS; ++j) {
                 Button bt = (Button) row.getChildAt(j);
-                bt.setText(String.format("1%s", bt.getHint()));
+                String formula = settings.getString("formula"+i+j, String.format("1%s", bt.getHint()));
+                bt.setText(formula);
                 bt.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
@@ -49,10 +56,14 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
-        for (int i = 2; i < 4; ++i) {
+        for (int i = 2; i < MAX_ROWS; ++i) {
             TableRow row = (TableRow) table.getChildAt(i);
-            for (int j = 0; j < row.getChildCount(); ++j) {
+            for (int j = 0; j < MAX_COLS; ++j) {
                 Button bt = (Button) row.getChildAt(j);
+                String label = settings.getString("label"+i+j, bt.getText().toString());
+                bt.setText(label);
+                String formula = settings.getString("formula"+i+j, bt.getHint().toString());
+                bt.setHint(formula);
                 bt.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
@@ -62,6 +73,32 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
+        for (int i = 0; i < 2; ++i) {
+            TableRow row = (TableRow) table.getChildAt(i);
+            for (int j = 0; j < MAX_COLS; ++j) {
+                Button bt = (Button) row.getChildAt(j);
+                editor.putString("formula"+i+j, bt.getText().toString());
+            }
+        }        for (int i = 2; i < MAX_ROWS; ++i) {
+            TableRow row = (TableRow) table.getChildAt(i);
+            for (int j = 0; j < MAX_COLS; ++j) {
+                Button bt = (Button) row.getChildAt(j);
+                editor.putString("label"+i+j, bt.getText().toString());
+                editor.putString("formula"+i+j, bt.getHint().toString());
+            }
+        }
+
+        editor.apply();
     }
 
     public void rollStandard(View view) {
