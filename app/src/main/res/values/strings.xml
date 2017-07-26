@@ -1,21 +1,5 @@
 <resources>
     <string name="app_name">NdX Dice Roller</string>
-    <string name="dice_4">d4</string>
-    <string name="dice_6">d6</string>
-    <string name="dice_8">d8</string>
-    <string name="dice_10">d10</string>
-    <string name="dice_12">d12</string>
-    <string name="dice_20">d20</string>
-    <string name="dice_100">d100</string>
-    <string name="dice_f">dF</string>
-    <string name="dice_custom1">CUSTOM1</string>
-    <string name="dice_custom2">CUSTOM2</string>
-    <string name="dice_custom3">CUSTOM3</string>
-    <string name="dice_custom4">CUSTOM4</string>
-    <string name="dice_custom5">CUSTOM5</string>
-    <string name="dice_custom6">CUSTOM6</string>
-    <string name="dice_custom7">CUSTOM7</string>
-    <string name="dice_custom8">CUSTOM8</string>
     <string name="button_roll">Roll</string>
     <string name="button_set">Set</string>
     <string name="help">Help: use long press to customize buttons or clear logs.</string>
