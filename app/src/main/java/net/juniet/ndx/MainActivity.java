@@ -1,6 +1,7 @@
 package net.juniet.ndx;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.NumberPicker;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -73,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
+
+        if (settings.getBoolean("showHelp", true)) {
+            Toast.makeText(getApplicationContext(), getString(R.string.help), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -81,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("showHelp", false);
 
         TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
         for (int i = 0; i < 2; ++i) {

@@ -18,4 +18,5 @@
     <string name="dice_custom8">CUSTOM8</string>
     <string name="button_roll">Roll</string>
     <string name="button_set">Set</string>
+    <string name="help">Help: use long press to customize buttons or clear logs.</string>
 </resources>
