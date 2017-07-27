@@ -2,6 +2,7 @@ package net.juniet.ndx
 
 import android.app.Dialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.AttributeSet
 import android.support.v7.widget.AppCompatButton
 import android.view.View
@@ -66,6 +67,7 @@ class DiceButton : AppCompatButton, View.OnLongClickListener {
             val n = np.value
             rollModel.numberOfDice = n
             text = if (n == 1) tag.toString() else rollModel.toString()
+            saveSettings(context.getSharedPreferences(MainActivity.PREFS_NAME, 0))
             d.dismiss()
         }
         d.show()
@@ -85,11 +87,24 @@ class DiceButton : AppCompatButton, View.OnLongClickListener {
             val newFormula = formula.text.toString()
             if (newName.isNotEmpty() && newFormula.isNotEmpty() && rollModel.tryParseFormula(newFormula)) {
                 text = newName
+                saveSettings(context.getSharedPreferences(MainActivity.PREFS_NAME, 0))
                 d.dismiss()
             } else {
                 Toast.makeText(context, context.getString(R.string.invalid_formula), Toast.LENGTH_LONG).show()
             }
         }
         d.show()
+    }
+
+    fun loadSettings(prefs: SharedPreferences) {
+        text = prefs.getString("label_" + tag, tag.toString())
+        rollModel = DiceRollModel(prefs.getString("formula_" + tag, rollModel.toString()))
+    }
+
+    fun saveSettings(prefs: SharedPreferences) {
+        val editor = prefs.edit()
+        editor.putString("label_" + tag, text.toString())
+        editor.putString("formula_" + tag, rollModel.toString())
+        editor.apply()
     }
 }

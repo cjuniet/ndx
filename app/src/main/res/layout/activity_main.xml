@@ -222,7 +222,7 @@
                 android:id="@+id/buttonCustom8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:rollModel="1df"
+                app:rollModel="1dF"
                 app:isCustom="true"
                 android:tag="custom8"
                 android:onClick="rollDice"

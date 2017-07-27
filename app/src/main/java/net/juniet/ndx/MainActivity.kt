@@ -10,9 +10,14 @@ import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
-    private val PREFS_NAME = "preferences"
-    private val PREFS_VERSION = "0.3"
+    companion object {
+         val PREFS_NAME = "preferences"
+         val PREFS_VERSION = "0.3"
+    }
+
     private var rollsCount = 0
+    private lateinit var mTextView: TextView
+    private lateinit var mTable: TableLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,22 +25,19 @@ class MainActivity : AppCompatActivity() {
 
         val settings = getSharedPreferences(PREFS_NAME, 0)
 
-        val textView = findViewById(R.id.rollResults) as TextView
-        textView.movementMethod = ScrollingMovementMethod()
-        textView.setOnLongClickListener { v ->
-            clearRollLogs(v as TextView)
+        mTextView = findViewById(R.id.rollResults) as TextView
+        mTextView.movementMethod = ScrollingMovementMethod()
+        mTextView.setOnLongClickListener { _ ->
+            clearRollLogs()
             true
         }
 
-        val table = findViewById(R.id.tableLayout) as TableLayout
-        for (i in 0..table.childCount - 1) {
-            val row = table.getChildAt(i) as TableRow
+        mTable = findViewById(R.id.tableLayout) as TableLayout
+        for (i in 0..mTable.childCount - 1) {
+            val row = mTable.getChildAt(i) as TableRow
             for (j in 0..row.childCount - 1) {
                 val bt = row.getChildAt(j) as DiceButton
-                val label = settings.getString("label_" + bt.tag, bt.tag.toString())
-                bt.text = label
-                val formula = settings.getString("formula_" + bt.tag, bt.rollModel.toString())
-                bt.rollModel = DiceRollModel(formula)
+                bt.loadSettings(settings)
             }
         }
 
@@ -45,24 +47,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
+        saveSettings()
         super.onStop()
+    }
 
+    fun saveSettings() {
         val settings = getSharedPreferences(PREFS_NAME, 0)
+
         val editor = settings.edit()
         editor.putString("version", PREFS_VERSION)
         editor.putBoolean("showHelp", false)
+        editor.apply()
 
-        val table = findViewById(R.id.tableLayout) as TableLayout
-        for (i in 0..table.childCount - 1) {
-            val row = table.getChildAt(i) as TableRow
+        for (i in 0..mTable.childCount - 1) {
+            val row = mTable.getChildAt(i) as TableRow
             for (j in 0..row.childCount - 1) {
                 val bt = row.getChildAt(j) as DiceButton
-                editor.putString("label_" + bt.tag, bt.text.toString())
-                editor.putString("formula_" + bt.tag, bt.rollModel.toString())
+                bt.saveSettings(settings)
             }
         }
-
-        editor.apply()
     }
 
     fun rollDice(view: View) {
@@ -72,17 +75,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addRollLog(model: DiceRollModel, result: DiceRollResult) {
+        ++rollsCount
+
         val sb = StringBuilder()
-        sb.append("\n\n#").append(++rollsCount)
+        if (rollsCount > 1 ) sb.append("\n\n")
+        sb.append("#").append(rollsCount)
         sb.append(": ").append(model.toString())
         sb.append(" = ").append(result.toString())
-
-        val text = findViewById(R.id.rollResults) as TextView
-        text.append(sb.toString())
+        mTextView.append(sb.toString())
     }
 
-    private fun clearRollLogs(text: TextView) {
-        text.text = null
+    private fun clearRollLogs() {
+        mTextView.text = null
         rollsCount = 0
     }
 }
