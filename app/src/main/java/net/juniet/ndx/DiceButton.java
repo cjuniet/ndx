@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 public class DiceButton extends AppCompatButton implements View.OnLongClickListener {
     private DiceRollModel mRollModel;
@@ -76,7 +77,6 @@ public class DiceButton extends AppCompatButton implements View.OnLongClickListe
                 getRollModel().setNumberOfDice(n);
                 setText(n == 1 ? getTag().toString() : getRollModel().toString());
                 d.dismiss();
-                callOnClick();
             }
         });
         d.show();
@@ -95,12 +95,14 @@ public class DiceButton extends AppCompatButton implements View.OnLongClickListe
         {
             @Override
             public void onClick(View v) {
-                d.dismiss();
                 final String n = name.getText().toString();
                 if (n.length() > 0) setText(n);
                 final String f = formula.getText().toString();
-                if (f.length() > 0) getRollModel().parseFormula(f);
-                callOnClick();
+                if (f.length() > 0 && getRollModel().parseFormula(f)) {
+                    d.dismiss();
+                } else {
+                    Toast.makeText(getContext(), getContext().getString(R.string.invalid_formula), Toast.LENGTH_LONG).show();
+                }
             }
         });
         d.show();
