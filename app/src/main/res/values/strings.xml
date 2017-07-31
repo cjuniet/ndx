@@ -3,5 +3,5 @@
     <string name="button_roll">Roll</string>
     <string name="button_set">Set</string>
     <string name="help">Help: use long press to customize buttons or clear logs.</string>
-    <string name="invalid_formula">Error: invalid roll name or formula; expected format is \'NdX+C\'"</string>
+    <string name="invalid_formula">Error: invalid roll name or formula"</string>
 </resources>

@@ -7,7 +7,7 @@ import java.util.regex.Pattern
 
 class DiceRollModel(formula: String) {
     private val rng = Random()
-    private val reg = Pattern.compile("(\\d+)d(\\d+|F)([+-]\\d+)?")
+    private val reg = Pattern.compile("(\\d+)[d|D](\\d+|f|F)([+-]\\d+)?")
 
     var numberOfDice: Int = 0
     private var mNumberOfFaces: Int = 0
@@ -50,11 +50,17 @@ class DiceRollModel(formula: String) {
         val m = reg.matcher(s)
         if (!m.matches()) return false
 
-        numberOfDice = Integer.parseInt(m.group(1))
-        if (m.group(2) == "F") {
+        val n = Integer.parseInt(m.group(1))
+        if (n < 1 || n > 100) return false
+
+        if (m.group(2) == "f" || m.group(2) == "F") {
+            numberOfDice = n
             setFUDGE()
         } else {
-            numberOfFaces = Integer.parseInt(m.group(2))
+            val x = Integer.parseInt(m.group(2))
+            if (n < 1 || n > 100) return false
+            numberOfDice = n
+            numberOfFaces = x
         }
         adjustment = if (m.group(3) != null) Integer.parseInt(m.group(3)) else 0
         return true

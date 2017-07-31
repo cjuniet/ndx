@@ -90,7 +90,7 @@ class DiceButton : AppCompatButton, View.OnLongClickListener {
                 saveSettings(context.getSharedPreferences(MainActivity.PREFS_NAME, 0))
                 d.dismiss()
             } else {
-                Toast.makeText(context, context.getString(R.string.invalid_formula), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, context.getString(R.string.invalid_formula), Toast.LENGTH_SHORT).show()
             }
         }
         d.show()

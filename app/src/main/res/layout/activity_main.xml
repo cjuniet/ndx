@@ -11,14 +11,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:ems="10"
         android:gravity="bottom"
-        android:inputType="none"
         android:isScrollContainer="true"
         android:scrollbars="vertical"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
@@ -30,204 +26,217 @@
 
     <TableLayout
         android:id="@+id/tableLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonD4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/colorAccent"
-                app:rollModel="1d4"
-                android:tag="d4"
                 android:onClick="rollDice"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="d4"
+                app:rollModel="1d4" />
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonD6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/colorAccent"
-                app:rollModel="1d6"
-                android:tag="d6"
                 android:onClick="rollDice"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="d6"
+                app:rollModel="1d6" />
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonD8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/colorAccent"
-                app:rollModel="1d8"
-                android:tag="d8"
                 android:onClick="rollDice"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="d8"
+                app:rollModel="1d8" />
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonD10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/colorAccent"
-                app:rollModel="1d10"
-                android:tag="d10"
                 android:onClick="rollDice"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="d10"
+                app:rollModel="1d10" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonD12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/colorAccent"
-                app:rollModel="1d12"
-                android:tag="d12"
                 android:onClick="rollDice"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="d12"
+                app:rollModel="1d12" />
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonD20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/colorAccent"
-                app:rollModel="1d20"
-                android:tag="d20"
                 android:onClick="rollDice"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="d20"
+                app:rollModel="1d20" />
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonD100"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/colorAccent"
-                app:rollModel="1d100"
-                android:tag="d100"
                 android:onClick="rollDice"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="d100"
+                app:rollModel="1d100" />
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonDF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/colorAccent"
-                app:rollModel="1dF"
-                android:tag="dF"
                 android:onClick="rollDice"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="dF"
+                app:rollModel="1dF" />
 
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonCustom1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rollModel="1d4"
-                app:isCustom="true"
-                android:tag="custom1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="100dp"
                 android:onClick="rollDice"
                 android:textSize="12sp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="custom1"
+                app:rollModel="1d4"
+                app:isCustom="true" />
+
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonCustom2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rollModel="1d6"
-                app:isCustom="true"
-                android:tag="custom2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="100dp"
                 android:onClick="rollDice"
                 android:textSize="12sp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="custom2"
+                app:rollModel="1d6"
+                app:isCustom="true" />
+
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonCustom3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rollModel="1d8"
-                app:isCustom="true"
-                android:tag="custom3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="100dp"
                 android:onClick="rollDice"
                 android:textSize="12sp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="custom3"
+                app:rollModel="1d8"
+                app:isCustom="true" />
+
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonCustom4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rollModel="1d10"
-                app:isCustom="true"
-                android:tag="custom4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="100dp"
                 android:onClick="rollDice"
                 android:textSize="12sp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="custom4"
+                app:rollModel="1d10"
+                app:isCustom="true" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonCustom5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rollModel="1d12"
-                app:isCustom="true"
-                android:tag="custom5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="100dp"
                 android:onClick="rollDice"
                 android:textSize="12sp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="custom5"
+                app:rollModel="1d12"
+                app:isCustom="true" />
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonCustom6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rollModel="1d20"
-                app:isCustom="true"
-                android:tag="custom6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="100dp"
                 android:onClick="rollDice"
                 android:textSize="12sp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="custom6"
+                app:rollModel="1d20"
+                app:isCustom="true" />
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonCustom7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rollModel="1d100"
-                app:isCustom="true"
-                android:tag="custom7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="100dp"
                 android:onClick="rollDice"
                 android:textSize="12sp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="custom7"
+                app:rollModel="1d100"
+                app:isCustom="true" />
 
             <net.juniet.ndx.DiceButton
                 android:id="@+id/buttonCustom8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rollModel="1dF"
-                app:isCustom="true"
-                android:tag="custom8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="100dp"
                 android:onClick="rollDice"
                 android:textSize="12sp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:tag="custom8"
+                app:rollModel="1dF"
+                app:isCustom="true" />
 
         </TableRow>
 
